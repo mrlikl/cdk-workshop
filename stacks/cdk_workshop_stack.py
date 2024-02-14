@@ -35,5 +35,3 @@ class CdkWorkshopStack(Stack):
                                                                      service_name='FlaskAppService',
                                                                      load_balancer_name="FlaskAppLB"
                                                                      )
-
-        service.target_group.configure_health_check(path='/health')
