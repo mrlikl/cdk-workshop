@@ -1,15 +1,11 @@
-# Use an existing Python image as the base image
-FROM matthewfeickert/docker-python3-ubuntu
+# Use a Python image as the base image
+FROM python:3
 
 # Set the working directory inside the container
 WORKDIR /
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
-
-COPY ./run.sh /tmp
-RUN sudo chmod +x /tmp/run.sh
-
 
 # Install the required packages
 RUN pip3 install --no-cache-dir -r requirements.txt
@@ -18,7 +14,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Specify the command to run when the container is started
-CMD ["./tmp/run.sh"]
+CMD [ "python3", "./app.py" ]
 
+#Expose app port
 EXPOSE 80
-EXPOSE 3330

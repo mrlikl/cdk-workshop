@@ -5,8 +5,13 @@ app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
-def healthpass():
-    return json.dumps({"message": "This is port 80"})
+def default_get():
+    return json.dumps({"message": "Hello from ECS container"})
+
+
+@app.route("/health", methods=["GET"])
+def health_check():
+    return json.dumps({"message": "Health Check pass"})
 
 
 if __name__ == "__main__":
