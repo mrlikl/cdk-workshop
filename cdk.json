@@ -1,5 +1,5 @@
 {
-  "app": "python3 app.py",
+  "app": "npx ts-node --prefer-ts-exts bin/cdk-workshop.ts",
   "watch": {
     "include": [
       "**"
@@ -7,11 +7,13 @@
     "exclude": [
       "README.md",
       "cdk*.json",
-      "requirements*.txt",
-      "source.bat",
-      "**/__init__.py",
-      "**/__pycache__",
-      "tests"
+      "**/*.d.ts",
+      "**/*.js",
+      "tsconfig.json",
+      "package*.json",
+      "yarn.lock",
+      "node_modules",
+      "test"
     ]
   },
   "context": {
@@ -55,6 +57,10 @@
     "@aws-cdk/aws-lambda-nodejs:useLatestRuntimeVersion": true,
     "@aws-cdk/aws-efs:mountTargetOrderInsensitiveLogicalId": true,
     "@aws-cdk/aws-rds:auroraClusterChangeScopeOfInstanceParameterGroupWithEachParameters": true,
-    "@aws-cdk/aws-appsync:useArnForSourceApiAssociationIdentifier": true
+    "@aws-cdk/aws-appsync:useArnForSourceApiAssociationIdentifier": true,
+    "@aws-cdk/aws-rds:preventRenderingDeprecatedCredentials": true,
+    "@aws-cdk/aws-codepipeline-actions:useNewDefaultBranchForCodeCommitSource": true,
+    "@aws-cdk/aws-cloudwatch-actions:changeLambdaPermissionLogicalIdForLambdaAction": true,
+    "@aws-cdk/aws-codepipeline:crossAccountKeysDefaultValueToFalse": true
   }
 }
