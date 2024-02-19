@@ -10,7 +10,9 @@ export class BasicCDKStack extends cdk.Stack {
 
     const l1_s3_bucket = new s3.CfnBucket(this, "MyL1Bucket", {})
 
-    const l2_s3_bucket = new s3.Bucket(this, "MyL2Bucket", {})
+    const l2_s3_bucket = new s3.Bucket(this, "MyL2Bucket", {
+      removalPolicy: cdk.RemovalPolicy.DESTROY
+    })
 
     const l2_sqs_queue = new sqs.Queue(this, 'MyQueue', {});
 
