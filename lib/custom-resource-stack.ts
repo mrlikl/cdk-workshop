@@ -6,7 +6,7 @@ export class CRSDKStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
-        const get_latest_ami_id = new cr.AwsCustomResource(this, 'GetAMIId', {
+        const getLatestAmiId = new cr.AwsCustomResource(this, 'GetAMIId', {
             onCreate: {
                 service: 'SSM',
                 action: 'getParameter',
@@ -20,7 +20,7 @@ export class CRSDKStack extends cdk.Stack {
             }),
         });
         new cdk.CfnOutput(this, 'ImageId', {
-            value: get_latest_ami_id.getResponseField('Parameter.Value'),
+            value: getLatestAmiId.getResponseField('Parameter.Value'),
         });
     }
 }
