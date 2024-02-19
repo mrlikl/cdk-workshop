@@ -8,13 +8,13 @@ export class PipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const codecommit_repo = code_commit.Repository.fromRepositoryName(this, 'CDKRepo',
+    const codecommitRepo = code_commit.Repository.fromRepositoryName(this, 'CDKRepo',
       "cdkpipeline"
     )
 
     const pipeline = new pipelines.CodePipeline(this, 'Pipeline', {
       synth: new pipelines.ShellStep('Synth', {
-        input: pipelines.CodePipelineSource.codeCommit(codecommit_repo, 'main'),
+        input: pipelines.CodePipelineSource.codeCommit(codecommitRepo, 'main'),
         commands: [
           'npm ci',
           'npm run build',
@@ -34,7 +34,7 @@ export class PipelineStack extends cdk.Stack {
       }
     });
 
-    const pre_prod = new S3AppStage(this, 'PreProd', {
+    const preProd = new S3AppStage(this, 'PreProd', {
       env: {
         account: props?.env?.account,
         region: 'eu-west-1'
@@ -49,7 +49,7 @@ export class PipelineStack extends cdk.Stack {
 
     pipeline.addStage(dev);
 
-    pipeline.addStage(pre_prod);
+    pipeline.addStage(preProd);
 
     pipeline.addStage(prod, {
       pre: [

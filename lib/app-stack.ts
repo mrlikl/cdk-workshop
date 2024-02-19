@@ -6,7 +6,7 @@ export class AppStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
-        const s3_bucket = new s3.Bucket(this, 'SampleBucket', {
+        const s3Bucket = new s3.Bucket(this, 'SampleBucket', {
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         }
         )
