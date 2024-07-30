@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { PipelineStack } from '../lib/pipeline-stack';
+import { CRStack } from '../lib/cr-stack';
 
 const app = new cdk.App();
-new PipelineStack(app, 'CdkWorkshopStack', {
+new CRStack(app, 'CdkWorkshopStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 
